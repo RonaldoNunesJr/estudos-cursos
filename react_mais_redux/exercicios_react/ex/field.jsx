@@ -1,36 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { ChangeValue } from './fieldAction'
 
-class Field extends Component {
-    constructor(props) {
-        super(props);
-        this.initialValue = {value: props.initialValue}
-        this.state = {value: props.initialValue}
-        this.handleChange = this.handleChange.bind(this)
-        this.handleFocus = this.handleFocus.bind(this)
-        this.handleOnBlur = this.handleOnBlur.bind(this)
-    }
-
-    handleChange (event) {
-        this.setState({ value: event.target.value })
-    }
-
-    handleFocus (event) {
-        if ( this.state.value === this.initialValue.value ) {
-            this.setState({value: ''})
-        }
-    }
-
-    handleOnBlur (event) {  
-        if ( this.state.value === '' ) {
-            this.setState({ value: this.initialValue.value })
-        }
-    }
-    
+class Field extends Component {    
     render () {
         return (
             <div>
-                <label>{this.state.value}</label><br />
-                <input type="text" value={this.state.value} 
+                <label>{this.props.value}</label><br />
+                <input type="text" value={this.props.value} 
                 onChange={this.handleChange} onFocus={this.handleFocus} onBlur={this.handleOnBlur} />
             </div>
         )
@@ -38,4 +16,12 @@ class Field extends Component {
 
 }
 
-export default Field
+function mapStateProps(state) {
+    return {value: state.field.value}
+}
+
+function mapDispatchToProps(dispatch) {
+    return {value:}
+}
+
+export default connect(mapStateProps, mapDispatchToProps)(Field)
