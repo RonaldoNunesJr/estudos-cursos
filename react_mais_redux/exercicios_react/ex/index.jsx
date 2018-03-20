@@ -10,6 +10,6 @@ const reducers = combineReducers({
 
 ReactDOM.render(
     <Provider store={createStore(reducers)}>
-        <Field initialValue="Teste" />
+        <Field value="Teste" initialValue="Escreva Algo" />
     </Provider>
 , document.getElementById('app'))
