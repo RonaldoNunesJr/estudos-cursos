@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ChangeValue } from './fieldAction'
+import { changeValue } from './fieldAction'
 
 class Field extends Component {    
     render () {
@@ -9,19 +9,19 @@ class Field extends Component {
             <div>
                 <label>{this.props.value}</label><br />
                 <input type="text" value={this.props.value} 
-                onChange={this.handleChange} onFocus={this.handleFocus} onBlur={this.handleOnBlur} />
+                onChange={this.props.changeValue} onFocus={this.handleFocus} onBlur={this.handleOnBlur} />
             </div>
         )
     }
 
 }
 
-function mapStateProps(state) {
+function mapStateToProps(state) {
     return {value: state.field.value}
 }
 
 function mapDispatchToProps(dispatch) {
-    return {value:}
+    return bindActionCreators({changeValue}, dispatch)
 }
 
-export default connect(mapStateProps, mapDispatchToProps)(Field)
+export default connect(mapStateToProps, mapDispatchToProps)(Field)
