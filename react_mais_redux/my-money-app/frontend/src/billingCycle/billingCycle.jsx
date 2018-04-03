@@ -1,7 +1,9 @@
 import React from 'react'
 
+import ContentHeader from '../common/template/contentHeader'
+
 export default props => (
     <div>
-        <h1>Ciclo de Pagamento</h1>
+        <ContentHeader title='Ciclo de Pagamento' small='Versão 1.0'/>
     </div>
 )
