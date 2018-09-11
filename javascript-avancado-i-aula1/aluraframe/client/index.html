@@ -5,7 +5,6 @@
     <title>Negociações</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
-    
 </head>
 <body class="container">
     
@@ -58,6 +57,11 @@
         <tfoot>
         </tfoot>
     </table>
-    
+    <script src="js/app/models/Negociacao.js"></script> 
+    <script>
+        let hoje = new Date();
+        let n1 = new Negociacao(hoje, 5, 700);
+        console.log(n1.data);
+    </script>
 </body>
 </html>
