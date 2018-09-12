@@ -8,11 +8,17 @@
 </head>
 <body>
     
-    <script src="Conta.js"></script>
-    <script src="ContaCorrente.js"></script>
-    <script src="ContaPoupanca.js"></script>
     <script>
-        let conta = new Conta('1.000');
+        class Relogio {
+
+            constructor() {
+                this._segundos = 0;
+
+                setInterval(() => console.log(++this._segundos), 1000);
+            }
+        }
+
+        var relogio = new Relogio();
     </script>
 </body>
 </html>
