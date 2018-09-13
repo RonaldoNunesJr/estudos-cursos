@@ -1,5 +1,5 @@
 class Mensagem {
-    constructor(armadilha, texto = '') {
+    constructor(texto = '') {
         this._texto = texto;
     }
 
