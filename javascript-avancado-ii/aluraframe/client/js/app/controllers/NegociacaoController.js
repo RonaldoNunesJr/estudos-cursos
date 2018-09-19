@@ -10,14 +10,16 @@ class NegociacaoController {
         this._listaNegociacoes = new Bind(
             new ListaNegociacoes(),
             new NegociacoesView($('#negociacoesView')),
-            'adiciona', 'esvazia'
-        )        
+            'adiciona', 'esvazia', 'ordena', 'inverteOrdem'
+        );        
 
         this._mensagem = new Bind(
             new Mensagem(),
             new MensagemView($('#mensagemView')),
             'texto'
         );
+
+        this._ordemAtual = '';
         
     }
     
@@ -25,9 +27,14 @@ class NegociacaoController {
 
         event.preventDefault();
 
-        this._listaNegociacoes.adiciona(this._criaNegociacao());
-        this._mensagem.texto = 'Negociação adicionada com sucesso';
-        this._limpaFormulario();
+        try {
+
+            this._listaNegociacoes.adiciona(this._criaNegociacao());
+            this._mensagem.texto = 'Negociação adicionada com sucesso';
+            this._limpaFormulario();
+        } catch(erro) {
+            this._mensagem.texto = erro;
+        }
     
     }
 
@@ -46,61 +53,6 @@ class NegociacaoController {
             negociacoes.forEach(negociacoes => this._listaNegociacoes.adiciona(negociacoes));
             this._mensagem.texto = 'Negociações importadas com sucesso';
         }).catch(error => this._mensagem.texto = error);
-        /*
-        service.obterNegociacoesDaSemana()
-            .then(negociacao => {
-                negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
-                this._mensagem.texto = "Negociações importadas com sucesso semana";
-            })
-            .catch(erro => this._mensagem.texto = erro);
-        
-        service.obterNegociacoesDaSemanaAnterior()
-            .then(negociacao => {
-                negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-                this._mensagem.texto = "Negociações importadas com sucesso semana";
-            })
-            .catch(erro => this._mensagem.texto = erro);
-        
-        service.obterNegociacoesDaSemanaRetrasada()
-            .then(negociacao => {
-                negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-                this._mensagem.texto = "Negociações importadas com sucesso retrasada";
-            })
-            .catch(erro => this._mensagem.texto = erro) 
-        */
-
-        /*service.obterNegociacoesDaSemana((erro, negociacao) => {
-            if (erro) {
-                this._mensagem.texto = erro;
-                return;
-            }
-
-            negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-            this._mensagem.texto = "Negociações importadas com sucesso semana";
-
-        });
-
-        service.obterNegociacoesDaSemanaAnterior((erro, negociacao) => {
-            if (erro) {
-                this._mensagem.texto = erro;
-                return;
-            }
-
-            negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-            this._mensagem.texto = "Negociações importadas com sucesso anterior";
-
-        });
-
-        service.obterNegociacoesDaSemanaRetrasada((erro, negociacao) => {
-            if (erro) {
-                this._mensagem.texto = erro;
-                return;
-            }
-
-            negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-            this._mensagem.texto = "Negociações importadas com sucesso retrasada";
-
-        });*/
 
     }
 
@@ -121,6 +73,18 @@ class NegociacaoController {
         this._inputValor.value = 0.0;
         this._inputData.focus();
 
+    }
+
+    ordena (coluna) {
+
+        if (this._ordemAtual == coluna) {
+            
+            this._listaNegociacoes.inverteOrdem();
+        } else {
+
+            this._listaNegociacoes.ordena((a, b) => a[coluna] - b[coluna]);
+        }
+        this._ordemAtual = coluna;
     }
 
 }
