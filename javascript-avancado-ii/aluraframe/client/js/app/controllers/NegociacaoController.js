@@ -40,17 +40,67 @@ class NegociacaoController {
     importaNegociacoes () {
         
         let service = new NegociacaoService();
+        service
+        .objetoNegociacoes()
+        .then(negociacoes => {
+            negociacoes.forEach(negociacoes => this._listaNegociacoes.adiciona(negociacoes));
+            this._mensagem.texto = 'Negociações importadas com sucesso';
+        }).catch(error => this._mensagem.texto = error);
+        /*
+        service.obterNegociacoesDaSemana()
+            .then(negociacao => {
+                negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+                this._mensagem.texto = "Negociações importadas com sucesso semana";
+            })
+            .catch(erro => this._mensagem.texto = erro);
+        
+        service.obterNegociacoesDaSemanaAnterior()
+            .then(negociacao => {
+                negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                this._mensagem.texto = "Negociações importadas com sucesso semana";
+            })
+            .catch(erro => this._mensagem.texto = erro);
+        
+        service.obterNegociacoesDaSemanaRetrasada()
+            .then(negociacao => {
+                negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                this._mensagem.texto = "Negociações importadas com sucesso retrasada";
+            })
+            .catch(erro => this._mensagem.texto = erro) 
+        */
 
-        service.obterNegociacoesDaSemana((erro, negociacao) => {
+        /*service.obterNegociacoesDaSemana((erro, negociacao) => {
             if (erro) {
                 this._mensagem.texto = erro;
                 return;
             }
 
             negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-            this._mensagem.texto = "Negociações importadas com sucesso";
+            this._mensagem.texto = "Negociações importadas com sucesso semana";
 
         });
+
+        service.obterNegociacoesDaSemanaAnterior((erro, negociacao) => {
+            if (erro) {
+                this._mensagem.texto = erro;
+                return;
+            }
+
+            negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+            this._mensagem.texto = "Negociações importadas com sucesso anterior";
+
+        });
+
+        service.obterNegociacoesDaSemanaRetrasada((erro, negociacao) => {
+            if (erro) {
+                this._mensagem.texto = erro;
+                return;
+            }
+
+            negociacao.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+            this._mensagem.texto = "Negociações importadas com sucesso retrasada";
+
+        });*/
 
     }
 
