@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Referência: https://www.youtube.com/watch?v=dbVQqcV9iEc -->
+    <!-- // LINKS IMPORTANTES:
+        - Autoprefixer (other browsers)- https://goo.gl/Ouy5Mk
+        - Flexbox Playground (flex-box constructor) - https://goo.gl/c8FwCa
+        - Polyfill (flex-box) - https://goo.gl/bkqwQP
+        - W3C documentação oficial flex-box - https://goo.gl/JksFFw
+    -->
+    <section id="content">
+        <article class="item">01</article>
+        <article class="item">02</article>
+        <article class="item">03</article>
+        <article class="item">04</article>
+    </section>
+
+    <style>
+        html, body {
+            
+            margin: 0;
+            padding: 0;
+        }
+
+        #content {
+            
+            background: #e7eef5;
+            height: 500px;
+            display: flex;
+            flex-direction: row;
+            /* flex-direction: column; */
+            /* flex-direction: row-reverse; */
+            /* flex-direction: column-reverse; */
+
+            flex-wrap: no-wrap;
+            /* flex-wrap: wrap; */
+            /* flex-wrap: wrap-reverse; */
+            
+            justify-content: flex-start;
+            /* justify-content: flex-end; */
+            /* justify-content: space-around; */
+            /* justify-content: space-between; */
+
+            align-items: flex-start;
+            /* align-items: flex-end; */
+            /* align-items: center; */
+            /* align-items: stretch; */
+            /* align-items: baseline; */
+
+        }    
+        
+        .item {
+            
+            height: 50px;
+            width: 100px;
+            color: #000;
+            -webkit-box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.24);
+            background: #fff;
+            margin: 5px;
+            
+            /* default */
+            flex: 0 1 auto; /*flex-grow  flex-shrink flex-basis*/
+            /* flex-grow: 0; Ocupa o resto da largura da div */
+            /* flex-shrink: 1; encolhe a nossa div */
+            /* flex-basis: auto; define uma width de cada elemento caso não tenha */
+            /* flex-basis: 100px; */
+        }
+        
+        .item:nth-child(1) {
+            flex-grow: 1;
+        }
+
+        /* .item:nth-child(1) {
+            order: 2;
+        }
+
+        .item:nth-child(2) {
+            order: 4;
+        }
+
+        .item:nth-child(3) {
+            order: 1;
+        }
+        
+        .item:nth-child(4) {
+            order: 3;
+        } */
+
+    </style>
+</body>
+</html>
